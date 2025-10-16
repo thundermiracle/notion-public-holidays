@@ -1,6 +1,6 @@
 {
   "name": "notion-public-holidays",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "thundermiracle",
   "license": "MIT",
   "packageManager": "pnpm@10.18.3",
