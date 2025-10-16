@@ -1,18 +1,38 @@
-name: 'advanced-typescript-action'
-description: "your action's description"
+name: 'notion-public-holidays'
+description: 'Import public holidays from Nager to a Notion database (data source)'
 branding:
   icon: 'bell'
   color: 'blue'
 author: 'Your name or organization here'
 inputs:
-  milliseconds:
-    description: 'milliseconds to sleep'
+  country-code:
+    description: 'Country code (e.g., JP, CN)'
     required: true
-    default: 1000
-  token:
-    description: 'https://docs.github.com/en/actions/security-guides/automatic-token-authentication#about-the-github_token-secret'
+  year:
+    description: 'Target year (YYYY). Defaults to current year'
     required: false
-    default: ${{ github.token }}
+  data-source-id:
+    description: 'Notion data source ID (database)'
+    required: true
+  title-prop:
+    description: 'Notion title property name. Default: Name'
+    required: false
+    default: 'Name'
+  date-prop:
+    description: 'Notion date property name. Default: Date'
+    required: false
+    default: 'Date'
+  category-prop:
+    description: 'Notion select property for category. Default: Category'
+    required: false
+    default: 'Category'
+  skip-duplicates:
+    description: 'Skip creating pages that already exist (date+title). Default: true'
+    required: false
+    default: 'true'
+  notion-token:
+    description: 'Notion API token (required)'
+    required: true
 runs:
   using: 'node16'
   main: 'dist/index.js'

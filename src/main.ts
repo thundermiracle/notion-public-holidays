@@ -1,20 +1,48 @@
 import * as core from '@actions/core';
 
-import { plus100ms } from './utils';
+import { importPublicHolidaysToNotion } from './importer';
 
 const main = async () => {
-  const ms = core.getInput('milliseconds');
-  core.debug(`Waiting ${ms} milliseconds ...`); // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
+  // Inputs
+  const countryCode = core.getInput('country-code', { required: true });
+  const yearStr = core.getInput('year');
+  const dataSourceId = core.getInput('data-source-id', { required: true });
+  const titleProp = core.getInput('title-prop');
+  const dateProp = core.getInput('date-prop');
+  const categoryProp = core.getInput('category-prop');
+  const skipDuplicates = core.getBooleanInput('skip-duplicates');
+  const notionToken = core.getInput('notion-token', { required: true });
 
-  core.debug(new Date().toTimeString());
-  await new Promise((resolve) => setTimeout(resolve, plus100ms(ms)));
-  core.debug(new Date().toTimeString());
+  const year = yearStr ? Number(yearStr) : undefined;
+  if (yearStr && (!/^[0-9]{4}$/.test(yearStr) || Number.isNaN(year))) {
+    throw new Error(`Invalid year: ${yearStr}`);
+  }
+  core.info(
+    `Importing holidays for ${countryCode} ${year ?? '(current year)'} ...`,
+  );
 
-  core.setOutput('time', new Date().toTimeString());
+  const result = await importPublicHolidaysToNotion({
+    source: { countryCode, year },
+    notion: {
+      dataSourceId,
+      token: notionToken,
+      propertyNames: {
+        title: titleProp,
+        date: dateProp,
+        category: categoryProp,
+      },
+      skipDuplicates,
+    },
+  });
+
+  core.info(`Imported ${result.length} holidays (before dedupe).`);
+  core.setOutput('count', result.length);
 };
 
 main().catch((error) => {
   if (error instanceof Error) {
     core.setFailed(error.message);
+  } else {
+    core.setFailed('Unknown error');
   }
 });
