@@ -1,4 +1,4 @@
-# advanced-typescript-action
+# notion-public-holidays
 
 A template for creating a GitHub Action using TypeScript with advanced features to make your Github Action life easier.
 

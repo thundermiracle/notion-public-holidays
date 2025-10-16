@@ -1,5 +1,5 @@
 {
-  "name": "advanced-typescript-action",
+  "name": "notion-public-holidays",
   "version": "0.1.0",
   "author": "thundermiracle",
   "license": "MIT",
@@ -16,7 +16,8 @@
     "cs:tag": "changeset tag"
   },
   "dependencies": {
-    "@actions/core": "^1.11.1"
+    "@actions/core": "^1.11.1",
+    "@notionhq/client": "^5.2.0"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.1",

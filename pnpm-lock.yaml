@@ -11,6 +11,9 @@ importers:
       '@actions/core':
         specifier: ^1.11.1
         version: 1.11.1
+      '@notionhq/client':
+        specifier: ^5.2.0
+        version: 5.2.0
     devDependencies:
       '@changesets/changelog-github':
         specifier: ^0.5.1
@@ -580,6 +583,10 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@notionhq/client@5.2.0':
+    resolution: {integrity: sha512-eRtjbwZ9sIZIHMZuJQMmq/dw4+8PI2lGfo0yu0XC65LFEPpQ75by4ZFZ8RlCxBbN2OJG8xCpP2hbCA8j+Sj3Jw==}
+    engines: {node: '>=18'}
 
   '@peculiar/asn1-schema@2.5.0':
     resolution: {integrity: sha512-YM/nFfskFJSlHqv59ed6dZlLZqtZQwjRVJ4bBAiWV08Oc+1rSd5lDZcBEx0lGDHfSoH3UziI2pXt2UM33KerPQ==}
@@ -3774,6 +3781,8 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.1
+
+  '@notionhq/client@5.2.0': {}
 
   '@peculiar/asn1-schema@2.5.0':
     dependencies:
